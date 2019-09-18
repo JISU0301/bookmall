@@ -7,10 +7,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-import kr.co.itcen.bookmall.vo.BookVo;
+import kr.co.itcen.bookmall.vo.UserVo;
 
-public class BookDao {
+
+public class UserDao {
 	public void delete() {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -18,7 +20,7 @@ public class BookDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "delete from book";
+			String sql = "delete from user";
 
 			pstmt = connection.prepareStatement(sql);
 
@@ -38,7 +40,7 @@ public class BookDao {
 		}
 	}
 	
-	public Boolean insert(BookVo vo) {
+	public Boolean insert(UserVo vo) {
 		Connection connection = null;
 		Statement stmt = null;
 		PreparedStatement pstmt = null;
@@ -47,12 +49,14 @@ public class BookDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "insert into book values(null, ?, ?, ?)";
+			String sql = "insert into user values(null, ?, ?, ?, ?, ?)";
 
 			pstmt = connection.prepareStatement(sql);
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setInt(2, vo.getPrice());
-			pstmt.setInt(3, vo.getCategory_no());
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPhone());
+			pstmt.setString(3, vo.getAddress());
+			pstmt.setString(4, vo.getEmail());
+			pstmt.setString(5, vo.getPasswd());
 			int count = pstmt.executeUpdate();
 			result = (count==1);
 			
@@ -85,8 +89,8 @@ public class BookDao {
 		return result;
 	}
 	
-	public ArrayList<Object> getList() {
-		ArrayList<Object> result = new ArrayList<Object>();
+	public List<UserVo> getList() {
+		List<UserVo> result = new ArrayList<UserVo>();
 		
 		Connection connection = null;
 		PreparedStatement pstmt = null;
@@ -95,25 +99,26 @@ public class BookDao {
 		try {
 			connection = getConnection();
 			
-			String sql = "select c.name as '카테고리',\r\n" + 
-						"b.title as '도서제목',\r\n" + 
-						"b.price as '도서가격'\r\n" + 
-						"from book b, category c\r\n" + 
-						"where c.no = b.category_no";
-			
+			String sql = "select no, name, phone, address, email, passwd from user order by no asc";
 			pstmt = connection.prepareStatement(sql);
 			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String categoryName = rs.getString(1);
-				String title = rs.getString(2);
-				int price = rs.getInt(3);
+				int no = rs.getInt(1);
+				String name = rs.getString(2);
+				String phone = rs.getString(3);
+				String address = rs.getString(4);
+				String email = rs.getString(5);
+				String passwd = rs.getString(6);
 				
-				ArrayList<Object> vo = new ArrayList<Object>();
-				vo.add(categoryName);
-				vo.add(title);
-				vo.add(price);
+				UserVo vo = new UserVo();
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setPhone(phone);
+				vo.setAddress(address);
+				vo.setEmail(email);
+				vo.setPasswd(passwd);
 				
 				result.add(vo);
 			}

@@ -1,26 +1,30 @@
 package kr.co.itcen.bookmall.vo;
 
 public class CartVo {
+	private int user_no;
 	private int book_no;
-	private int customer_no;
-	private 
+	private int quantity;
 	
+	@Override
+	public String toString() {
+		return "CartVo [user_no=" + user_no + ", book_no=" + book_no + ", quantity=" + quantity + "]";
+	}
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	public int getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(int user_no) {
+		this.user_no = user_no;
+	}
 	public int getBook_no() {
 		return book_no;
 	}
 	public void setBook_no(int book_no) {
 		this.book_no = book_no;
 	}
-	public int getCustomer_no() {
-		return customer_no;
-	}
-	public void setCustomer_no(int customer_no) {
-		this.customer_no = customer_no;
-	}
-	
-	@Override
-	public String toString() {
-		return "CartVo [책 번호 : " + book_no + ", 고객 번호 : " + customer_no + "]";
-	}
-	
 }

@@ -1,13 +1,16 @@
 package kr.co.itcen.bookmall.vo;
 
 public class CategoryVo {
-	private Long no;
+	private int no;
 	private String name;
-
-	public Long getNo() {
+	@Override
+	public String toString() {
+		return "CategoryVo [no=" + no + ", name=" + name + "]";
+	}
+	public int getNo() {
 		return no;
 	}
-	public void setNo(Long no) {
+	public void setNo(int no) {
 		this.no = no;
 	}
 	public String getName() {
@@ -16,11 +19,4 @@ public class CategoryVo {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	@Override
-	public String toString() {
-		return "CategoryVo [번호 : " + no + ", 이름 : " + name + "]";
-	}
-	
-
 }
