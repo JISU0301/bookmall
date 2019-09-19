@@ -8,8 +8,8 @@ import kr.co.itcen.bookmall.vo.BookVo;
 
 public class BookDaoTest {
 	public static void main(String[] args) {
-		//insertTest();
-		selectTest();
+		insertTest();
+//		selectTest();
 		//deleteAllTest();
 	}
 	
